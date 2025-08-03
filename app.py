@@ -6,13 +6,9 @@ import numpy as np
 from PIL import Image
 import os
 
-# Load spaCy model with fallback download
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    from spacy.cli import download
-    download("en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
 
 st.set_page_config(page_title="Smart Redactor", layout="centered")
 st.title("🛡️ Smart Redactor for Scanned Documents")
@@ -52,3 +48,4 @@ if uploaded_file:
         file_name="redacted_output.png",
         mime="image/png"
     )
+
