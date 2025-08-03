@@ -4,9 +4,15 @@ import spacy
 import cv2
 import numpy as np
 from PIL import Image
+import os
 
-# Load spaCy model
-nlp = spacy.load("en_core_web_sm")
+# Load spaCy model with fallback download
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    from spacy.cli import download
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
 st.set_page_config(page_title="Smart Redactor", layout="centered")
 st.title("🛡️ Smart Redactor for Scanned Documents")
